@@ -6,13 +6,14 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "on": "node app/index.js"
+    "start": "node app/index.js"
   },
   "keywords": [],
   "author": "igor uriel",
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^3.3.0",
+    "puppeteer": "^19.7.1",
     "readline-sync": "^1.4.10"
   }
 }

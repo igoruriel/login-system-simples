@@ -1,5 +1,5 @@
-import Controller from "./Controller/Controller.js";
+import { MainController } from "./Controller/Main-Controller.js";
 
-const app = new Controller();
+const app = new MainController();
 
 app.login();
