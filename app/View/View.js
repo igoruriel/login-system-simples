@@ -26,27 +26,23 @@ class View {
 
   getUserInput(message, callback, options = { password: false }) {
 
-    // EU NAO ESTOU SUPORTANDO MAIS MEU DEUS, O QUE ESTÁ ERRADO AQUI MEU PAI, MOSTRE O CAMINHO PARA TEU SERVO LEAL MEU SENHOR
-    // let pass = false;
-    // let output = (string) => this.#rl.output.write(string);
+    // EU NAO ESTOU SUPORTANDO MAIS MEU DEUS, O QUE ESTÁ ERRADO AQUI MEU PAI, 
+    // MOSTRE O CAMINHO PARA TEU SERVO LEAL MEU SENHOR
+    const output = (string) => this.#rl.output.write(string);
 
-    // this.#rl._writeToOutput = function (stringToWrite) {
-    //   if (pass) {
-    //     output(stringToWrite.replace(/./g, '*'));
-    //   } else {
-    //     output(stringToWrite)
-    //   }
-    // };
+    this.#rl._writeToOutput = function (stringToWrite) {
+      if (_pass) {
+        output(stringToWrite.replace(/./g, '*'));
+      } else {
+        output(stringToWrite)
+      }
+    };
 
-    // if (options.password) {
-    //   pass = true;
-    // } else {
-    //   pass = false;
-    // }
-
-    this.#rl.question(message, function (input) {
+    this.#rl.question(message, (input) => {
       callback(input)
     });
+
+    var _pass = options.password;
   }
 
   templateBasicLayout({ options }) {
