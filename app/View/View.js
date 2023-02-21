@@ -2,6 +2,7 @@ import { createInterface } from 'node:readline';
 
 class View {
   #rl;
+
   constructor() {
     this.#rl = createInterface({
       input: process.stdin,
@@ -24,8 +25,27 @@ class View {
   }
 
   getUserInput(message, callback, options = { password: false }) {
-    this.#rl.question(message, (input) => {
-      callback(input);
+
+    // EU NAO ESTOU SUPORTANDO MAIS MEU DEUS, O QUE ESTÁ ERRADO AQUI MEU PAI, MOSTRE O CAMINHO PARA TEU SERVO LEAL MEU SENHOR
+    // let pass = false;
+    // let output = (string) => this.#rl.output.write(string);
+
+    // this.#rl._writeToOutput = function (stringToWrite) {
+    //   if (pass) {
+    //     output(stringToWrite.replace(/./g, '*'));
+    //   } else {
+    //     output(stringToWrite)
+    //   }
+    // };
+
+    // if (options.password) {
+    //   pass = true;
+    // } else {
+    //   pass = false;
+    // }
+
+    this.#rl.question(message, function (input) {
+      callback(input)
     });
   }
 
@@ -49,17 +69,20 @@ class View {
 
     this.displayMessage(layout['header']);
     for (let option in options) {
-      this.displayMessage(`[ ${option} ] - ${options[option]['name']}`);
+      const opcaoValidaDoArray = Number(option) + 1
+      this.displayMessage(`[ ${opcaoValidaDoArray} ] - ${options[option]['name']}`);
     }
     return layout['footer'];
   }
 
   templateMenu(menuList, callbackMainMenu) {
-
     this.getUserInput(this.templateOptions(menuList), (answer) => {
-      if (menuList[answer]) {
+
+      const respostaEquivalente = Number(answer) - 1
+
+      if (menuList[respostaEquivalente]) {
         this.templateBasicLayout({ options: 'line' });
-        menuList[answer]['value']();
+        menuList[respostaEquivalente]['value']();
       } else {
         this.templateBasicLayout({ options: 'line' });
         this.displayMessage('Opção inválida. Tente novamente.', { messageType: 'error' });

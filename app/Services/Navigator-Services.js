@@ -46,11 +46,6 @@ export default class NavigatorServices {
     this.#page.goto(url)
   }
 
-  // service ou model que adiciona vários textos em um array. 
-  // os textos desse array vão iterar em uma função do puppet 
-  // que vai abrir uma nova aba que contém aquele texto.
-  // {name: string, url: string, value: string, process: string}??
-
   async screenshot() {
     await this.#page.screenshot({ path: 'google.png' });
   }

@@ -93,28 +93,28 @@ export default class NavigatorController {
   #navigatorMenu() {
     this.#view.templateUserConnected(this.#model.currentUser[0])
 
-    const navMenu = {
-      1: {
+    const navMenu = [
+      {
         name: '⛔️ Fechar Navegador',
         value: () => this.#closeNavigator(),
       },
-      2: {
+      {
         name: '🪞  Screenshot', //seria interessante criar um novo menu que abre apenas quando o navegador é escolhido,
         value: () => this.#screenShot(),
       },
-      3: {
+      {
         name: '📥 Nova aba',
         value: () => this.#newPage(),
       },
-      4: {
+      {
         name: '🔄 Reiniciar Navegador',
         value: () => this.#restartNavigator(),
       },
-      5: {
+      {
         name: `↪️  Voltar para o Menu Principal`,
         value: () => this.#cbMenu(),
       },
-    }
+    ]
 
     this.#view.templateMenu(navMenu, this.#navigatorMenu.bind(this))
   }
