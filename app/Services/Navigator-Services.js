@@ -5,6 +5,8 @@ export default class NavigatorServices {
   #page;
   #browser;
 
+
+
   async open(user, pass) {
     this.#browser = await pup.launch({
       headless: false

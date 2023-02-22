@@ -1,6 +1,7 @@
 import View from '../View/View.js';
 import Model from '../Model/Model.js';
 import NavigatorController from './Navigator-Controller.js';
+import { measureTime, __decorate } from "../decorators/measureTime.js";
 
 export class MainController {
   #view;
@@ -73,3 +74,6 @@ export class MainController {
     this.#view.templateMenu(menu, this.#mainMenu.bind(this));
   }
 }
+
+__decorate([measureTime()], MainController.prototype, "login", null);
+__decorate([measureTime()], MainController.prototype, "_mainMenu", null)
