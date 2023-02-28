@@ -26,3 +26,5 @@ Inquirer entrará em breve.
 - 1 Model de menu para cada lista de menu.
 - Decorators: quis fazer um teste... só pra entender mesmo com funciona, mas me parece que tem algo para cozinhar aqui.
 - Lose jobs opportunities.
+- algo que aprendi recentemente:
+  - Controller faz o "de-para" do código, o Services possui a lógica, a View possui a parte gráfica/interface, o services e a view não se conversam, seria papel do controller intermediar as chamadas da view com a lógica do services... ex.: se eu digito 1 na interface do meu terminal, o comando/"sinal" retorna da view para o controller e envia para o services processar a informação
