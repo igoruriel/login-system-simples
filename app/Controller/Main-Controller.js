@@ -1,5 +1,5 @@
 import View from '../View/View.js';
-import Model from '../Model/Model.js';
+import UserModel from '../Model/User-Model.js';
 import NavigatorController from './Navigator-Controller.js';
 import { measureTime, __decorate } from "../decorators/measureTime.js";
 
@@ -10,7 +10,7 @@ export class MainController {
 
   constructor() {
     this.#view = new View();
-    this.#model = new Model();
+    this.#model = new UserModel();
     this.#navController = new NavigatorController(this.#view, this.#model, this._mainMenu.bind(this))
   }
 
@@ -18,8 +18,7 @@ export class MainController {
     this.#view.getUserInput(`🪪  Digite o nome do usuário: `, (username) => {
       this.#view.getUserInput(`🔏 Digite a senha do usuário: `, (password) => {
 
-        this.#model.users[username] = password;
-        this.#model.currentUser = Object.entries(this.#model.users).flat();
+        this.#model.loginUser(username, password);
 
         this.#view.templateBasicLayout({ options: 'line' });
         this.#view.displayMessage(`Usuário ${username} logado com sucesso!`, { messageType: 'success' });
@@ -30,12 +29,11 @@ export class MainController {
   }
 
   #checkUsersLoggedIn() {
-    if (!this.#model.currentUser) {
+    if (!this.#model.currentUser || /\s/.test(this.#model.currentUser[0])) {
       this.#view.displayMessage("Algo de errado está errado, estamos sem user e estamos logado??", { messageType: 'error' })
-      this.#mainMenu();
+    } else {
+      this.#view.displayMessage(`Há um usuário logado, veja: ${this.#model.currentUser[0]}`, { messageType: 'success' });
     }
-
-    this.#view.displayMessage(`Há um usuário logado, veja: ${this.#model.currentUser[0]}`, { messageType: 'success' });
     this.#mainMenu();
   }
 
@@ -75,5 +73,5 @@ export class MainController {
   }
 }
 
-__decorate([measureTime()], MainController.prototype, "login", null);
-__decorate([measureTime()], MainController.prototype, "_mainMenu", null)
+// __decorate([measureTime()], MainController.prototype, "login", null);
+// __decorate([measureTime()], MainController.prototype, "_mainMenu", null)

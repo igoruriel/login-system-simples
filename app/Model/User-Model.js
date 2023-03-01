@@ -1,7 +1,23 @@
-export default class Model {
+export default class UserModel {
+  #user = {};
+  #currentUser = null;
   constructor() {
-    this.users = {}
-    this.currentUser = null;
+    if (UserModel.instance) {
+      return UserModel.instance
+    }
+  }
+
+  get currentUser() {
+    return this.#currentUser;
+  }
+
+  #setCurrentUser(user) {
+    this.#currentUser = Object.entries(user).flat() ?? null;
+  }
+
+  loginUser(user, password) {
+    this.#user[user] = password;
+    this.#setCurrentUser(this.#user);
   }
 
   // cadastrar número de processos? 
