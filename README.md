@@ -3,7 +3,7 @@
 ## Inicializar
 
 ```shell
-npm run on
+npm run start
 ```
 
 ## Propósito
