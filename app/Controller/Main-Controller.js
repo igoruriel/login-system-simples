@@ -1,20 +1,24 @@
-import View from '../View/View.js';
-import UserModel from '../Model/User-Model.js';
-import NavigatorController from './Navigator-Controller.js';
-import { measureTime, __decorate } from "../decorators/measureTime.js";
-
 export class MainController {
   #view;
   #model;
-  #navController
+  #navigator;
+  #menu;
 
-  constructor() {
-    this.#view = new View();
-    this.#model = new UserModel();
-    this.#navController = new NavigatorController(this.#view, this.#model, this._mainMenu.bind(this))
+  constructor({ view, model, ...dependencies }) {
+    const _deps = Object.freeze(dependencies);
+
+    const _view = view ?? null;
+    const _model = model ?? null;
+    const _navigator = _deps['navigator'] ?? null;
+
+    this.#view = _view;
+    this.#model = _model;
+    this.#navigator = _navigator;
+    this.#menu = _deps['menu'] ?? null
+    // this.#deps = _deps;
   }
 
-  login() {
+  #login() {
     this.#view.getUserInput(`🪪  Digite o nome do usuário: `, (username) => {
       this.#view.getUserInput(`🔏 Digite a senha do usuário: `, (password) => {
 
@@ -38,18 +42,14 @@ export class MainController {
   }
 
   // devo criar um Form Controller? r: não, mas preciso de alguns métodos que preencha formulários;
-  // 
-  #registerPath() {
-    // função para registrar o comaninho de uma pasta
-  }
+  // // 
+  // #registerPath() {
+  //   // função para registrar o comaninho de uma pasta
+  // }
 
-  #registerSender() {
-    // função para registrar o nome de um remetente
-  }
-
-  _mainMenu() {
-    this.#mainMenu();
-  }
+  // #registerSender() {
+  //   // função para registrar o nome de um remetente
+  // }
 
   #mainMenu() {
     this.#view.templateUserConnected(this.#model.currentUser[0])
@@ -61,7 +61,7 @@ export class MainController {
       },
       {
         name: '🌐 Abrir navegador',
-        value: () => this.#navController.open(),
+        value: () => this.#navigator.open(),
       },
       {
         name: '🛑 Quit',
@@ -70,6 +70,11 @@ export class MainController {
     ]
 
     this.#view.templateMenu(menu, this.#mainMenu.bind(this));
+  }
+
+  init() {
+    this.#menu.newMenu({ mainMenu: () => this.#mainMenu() });
+    this.#login();
   }
 }
 

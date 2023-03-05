@@ -5,26 +5,12 @@ export default class NavigatorServices {
   #page;
   #browser;
 
-
-
-  async open(user, pass) {
+  async open() {
     this.#browser = await pup.launch({
       headless: false
     });
     this.#page = await this.#browser.newPage();
     await this.#page.goto('https://www.google.com', { waitUntil: 'load' });
-    // const inputUser = await page.waitForSelector("#txtUsuario", { timeout: 0 })
-    // await inputUser.type(user, {
-    //   delay: 10
-    // });
-
-    // const inputPass = await page.waitForSelector('#pwdSenha', { timeout: 0 });
-    // await inputPass.type(pass, {
-    //   delay: 20
-    // });
-
-    // await page.click('#sbmLogin');
-    // await page.waitForNavigation();
 
     // this.#browser = browser;
     // this.#page = page;

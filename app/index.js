@@ -1,5 +1,3 @@
-import { MainController } from "./Controller/Main-Controller.js";
+import { AppFactory } from "./Factories/App-factory.js";
 
-const app = new MainController();
-
-app.login();
+AppFactory.initialize();

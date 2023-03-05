@@ -1,10 +1,12 @@
 export default class UserModel {
   #user = {};
   #currentUser = null;
+
   constructor() {
     if (UserModel.instance) {
       return UserModel.instance
     }
+    UserModel.instance = this;
   }
 
   get currentUser() {

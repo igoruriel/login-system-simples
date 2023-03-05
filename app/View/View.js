@@ -10,8 +10,9 @@ class View {
     });
   }
 
-  displayMessage(messages, { options, messageType } = {}) {
+  displayMessage(messages, { messageType } = {}) {
     // layoutMessages: warning, success, error
+    // options = {}: 
     let msg = '';
     Array.isArray(messages) ? msg = messages.join('') : msg = messages
 
@@ -68,6 +69,7 @@ class View {
       const opcaoValidaDoArray = Number(option) + 1
       this.displayMessage(`[ ${opcaoValidaDoArray} ] - ${options[option]['name']}`);
     }
+
     return layout['footer'];
   }
 
